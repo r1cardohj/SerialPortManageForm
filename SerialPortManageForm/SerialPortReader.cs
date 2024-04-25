@@ -2,11 +2,11 @@
 using System.IO.Ports;
 using System.Text;
 
-namespace SerialPortManage
+namespace SerialPortManageForm
 {
     internal class SerialPortReader
     {
-        static void Main(string[] args)
+        static void Test(string[] args)
         {
             try
             {
