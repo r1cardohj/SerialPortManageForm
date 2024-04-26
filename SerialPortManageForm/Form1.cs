@@ -84,15 +84,11 @@ namespace SerialPortManageForm
             {
                 if (SerialPortDataVaildator.Vailate(portName, baudRate, dataBits))
                 {
-                    SerialPortFactory spfactory = new SerialPortFactory(portName,
-                                                                        baudRate,
-                                                                        dataBits);
-                    SerialPort sp = spfactory.CreateSerialPort();
-                    Thread t = new Thread(handle);
-                    _workerShouldStop = false;
-                    t.Start();
-                    SerialPortBaseData.WorkerThreads.Push(t);
-
+                    SerialPortFactory factory = new SerialPortFactory(portName, baudRate, dataBits);
+                    SerialPort port = factory.CreateSerialPort();
+                    SerialPortHandler handler = new SerialPortHandler(port,
+                                                                      this.DataTextBoxRefresh,
+                                                                      this.CancelOKOrErrorInfo)
                     comboBoxCOMPort.Enabled = false;
                     baudRateComboBox.Enabled = false;
                     dataBitsComboBox.Enabled = false;
@@ -116,6 +112,20 @@ namespace SerialPortManageForm
 
         }
 
-        private void handle() { }; 
+
+        private void DataTextBoxRefresh(string s) {
+            if (DataTextBox.InvokeRequired)
+            {
+                DataTextBox.Invoke(new Action<string>(DataTextBoxRefresh), s);
+            }
+            else
+            {
+                DataTextBox.Text = s;
+            }
+        }
+
+        private void CancelOKOrErrorInfo(bool ret) { 
+            // todo
+        }
     }
 }

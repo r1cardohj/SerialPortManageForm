@@ -51,6 +51,7 @@
     <Compile Include="SerialPortBaseData.cs" />
     <Compile Include="SerialPortDataVaildator.cs" />
     <Compile Include="SerialPortFactory.cs" />
+    <Compile Include="SerialPortHandler.cs" />
     <Compile Include="SerialPortReader.cs" />
     <Compile Include="SerialPortStack.cs" />
     <EmbeddedResource Include="Form1.resx">
