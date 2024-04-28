@@ -12,39 +12,11 @@ namespace SerialPortManageForm
 {
     public partial class Form1 : Form
     {
-        private volatile bool _workerShouldStop = false;
+        private System.Windows.Forms.Timer clearScanInputTimer;
+        private DateTime lastTextChangeTime;
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,11 +40,6 @@ namespace SerialPortManageForm
             dataBitsComboBox.SelectedItem = SerialPortBaseData.DefaultDataBits;
         }
 
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
         private void startBtn_Click(object sender, EventArgs e)
         {
             int baudRate, dataBits;
@@ -88,11 +55,10 @@ namespace SerialPortManageForm
                     SerialPort port = factory.CreateSerialPort();
                     SerialPortHandler handler = new SerialPortHandler(port,
                                                                       this.DataTextBoxRefresh,
-                                                                      this.CancelOKOrErrorInfo)
-                    comboBoxCOMPort.Enabled = false;
-                    baudRateComboBox.Enabled = false;
-                    dataBitsComboBox.Enabled = false;
-                    startBtn.Enabled = false;
+                                                                      this.CancelOKOrErrorInfo);
+                    handler.handle();
+                    this.setConnectDisable(false);
+                    textBoxQRScanner.Focus();
                 }
                 else
                 {
@@ -120,12 +86,68 @@ namespace SerialPortManageForm
             }
             else
             {
-                DataTextBox.Text = s;
+                DataTextBox.AppendText(s);
+                DataTextBox.ScrollToCaret();
             }
         }
 
-        private void CancelOKOrErrorInfo(bool ret) { 
+        private void CancelOKOrErrorInfo(bool ret) {
             // todo
+            if (!ret)
+                MessageBox.Show("工作线程异常终止",
+                                "错误",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            else
+            {
+                MessageBox.Show("关闭成功！",
+                                "successful",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                this.setConnectDisable(true);
+            }
         }
+
+        private void endBtn_Click(object sender, EventArgs e)
+        {
+            SerialPortBaseData.workerShouldStop = true;
+        }
+        private void setConnectDisable(bool ret) { 
+            comboBoxCOMPort.Enabled = ret;
+            baudRateComboBox.Enabled = ret;
+            dataBitsComboBox.Enabled = ret;
+            startBtn.Enabled = ret;
+        }
+
+        private void textBoxQRScanner_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb != null)
+            {
+                if (ScanContentVailator.Vailate(tb.Text))
+                {
+                    setScanContentOkOrErr(true);
+                }
+                else
+                {
+                    setScanContentOkOrErr(false);
+                }
+            }
+        }
+
+        private void setScanContentOkOrErr(bool ret)
+        {
+            if (ret)
+            {
+                labelScanQRVaild.Text = "✔";
+                labelScanQRVaild.ForeColor = Color.Green;
+            }
+            else
+            { 
+                labelScanQRVaild.Text = "❌";
+                labelScanQRVaild.ForeColor = Color.Red;
+            }
+        }
+
     }
-}
+} 

@@ -22,22 +22,44 @@ namespace SerialPortManageForm
 
         public void handle()
         {
-            this.serialPort.Open();
-            Thread reciver = new Thread(
-               () => {
-                   int i = 0;
-                   while (true)
-                   {
-                       Thread.Sleep(1000);
-                       this.sendCallBack(string);
-                       i++;
-                   }
-               }
-                );
+            Thread reciver = new Thread( () => {
+                int i = 0;
+                string resp;
+                try
+                {
+                    SerialPortReader reader = new SerialPortReader();
+                    this.serialPort.Open();
+                    while (!SerialPortBaseData.workerShouldStop)
+                    {
+                        Thread.Sleep(500);
+                        //resp = i.ToString();
+                        resp = reader.Read(this.serialPort);
+
+                        if (!string.IsNullOrEmpty(resp))
+                        {
+                            resp += Environment.NewLine;
+                            this.sendCallBack(resp);
+                        }
+                        i++;
+                    }
+                    if (this.serialPort.IsOpen)
+                        this.serialPort.Close();
+                    this.endCallBack(true);
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(e.ToString());
+                    this.endCallBack(false);
+                }
+                finally
+                { 
+                    SerialPortBaseData.PortCtxStack.Pop();
+                    SerialPortBaseData.WorkerThreads.Pop();
+                }
+            } );
+            SerialPortBaseData.workerShouldStop = false;
+            reciver.Start();
+            SerialPortBaseData.WorkerThreads.Push(reciver);
         }
-
-
-
-
     }
 }

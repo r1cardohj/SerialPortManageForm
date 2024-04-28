@@ -12,6 +12,9 @@ namespace SerialPortManageForm
     internal class SerialPortBaseData
     {
 
+        //用于控制子线程结束
+        public static volatile bool workerShouldStop = false; 
+
         public static readonly int[] BaudRateSet = {
             1200, 2400, 4800, 9600, 19200, 38400, 57600, 76800,
             115200, 128000, 230400, 256000, 460800, 512000, 
@@ -38,8 +41,7 @@ namespace SerialPortManageForm
 
         public static SerialPort CurrentPort
         {
-            get
-            {
+            get {
                 return _stack.Peek();
             }
         }

@@ -27,11 +27,8 @@ namespace SerialPortManageForm
             }
             SerialPort port = _data[_data.Count - 1];
             _data.RemoveAt(_data.Count - 1);
-            try
-            {
+            if (port.IsOpen)
                 port.Close();
-            }
-            catch { }
 
             return port;
         }
