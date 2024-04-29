@@ -17,6 +17,24 @@ namespace SerialPortManageForm
         public Form1()
         {
             InitializeComponent();
+            InitalizeClearScanInputTimmer();
+        }
+        private void InitalizeClearScanInputTimmer()
+        {
+            clearScanInputTimer = new System.Windows.Forms.Timer();
+            clearScanInputTimer.Interval = 2000;
+            clearScanInputTimer.Tick += ClearScanInputTimmer_Tick;
+            clearScanInputTimer.Enabled = false;
+        }
+
+        private void ClearScanInputTimmer_Tick(object sender, EventArgs e)
+        {
+            if ((DateTime.Now - lastTextChangeTime).TotalSeconds >= 2
+                && isScanInputErr())
+            {
+                clearScanInputTimer.Stop();
+                textBoxQRScanner.Clear();
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -127,10 +145,15 @@ namespace SerialPortManageForm
                 if (ScanContentVailator.Vailate(tb.Text))
                 {
                     setScanContentOkOrErr(true);
+                    clearScanInputTimer.Stop();
+                    ScanContentHandler handler = new ScanContentHandler(tb.Text,
+                                                                        this.setTextBoxQRScanner,
+                                                                        )
                 }
                 else
                 {
                     setScanContentOkOrErr(false);
+                    clearScanInputTimer.Start();
                 }
             }
         }
@@ -149,5 +172,15 @@ namespace SerialPortManageForm
             }
         }
 
+        private bool isScanInputErr()
+        {
+            return labelScanQRVaild.Text == "❌" 
+                && textBoxQRScanner.Text != "";
+        }
+
+        private void setTextBoxQRScanner(string s)
+        {
+            textBoxQRScanner.Text = s;
+        }
     }
 } 

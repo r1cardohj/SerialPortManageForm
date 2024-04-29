@@ -44,6 +44,8 @@
             this.textBoxQRScanner = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.labelScanQRVaild = new System.Windows.Forms.Label();
+            this.textBoxPrintLMes = new System.Windows.Forms.TextBox();
+            this.labelPrintMes = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxCOMPort
@@ -205,11 +207,36 @@
             this.labelScanQRVaild.TabIndex = 17;
             this.labelScanQRVaild.Text = "👀";
             // 
+            // textBoxPrintLMes
+            // 
+            this.textBoxPrintLMes.AcceptsReturn = true;
+            this.textBoxPrintLMes.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxPrintLMes.Location = new System.Drawing.Point(584, 123);
+            this.textBoxPrintLMes.Multiline = true;
+            this.textBoxPrintLMes.Name = "textBoxPrintLMes";
+            this.textBoxPrintLMes.ReadOnly = true;
+            this.textBoxPrintLMes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxPrintLMes.Size = new System.Drawing.Size(166, 250);
+            this.textBoxPrintLMes.TabIndex = 18;
+            this.textBoxPrintLMes.WordWrap = false;
+            // 
+            // labelPrintMes
+            // 
+            this.labelPrintMes.AutoSize = true;
+            this.labelPrintMes.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelPrintMes.Location = new System.Drawing.Point(581, 94);
+            this.labelPrintMes.Name = "labelPrintMes";
+            this.labelPrintMes.Size = new System.Drawing.Size(87, 16);
+            this.labelPrintMes.TabIndex = 19;
+            this.labelPrintMes.Text = "打印消息：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelPrintMes);
+            this.Controls.Add(this.textBoxPrintLMes);
             this.Controls.Add(this.labelScanQRVaild);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxQRScanner);
@@ -252,6 +279,8 @@
         private System.Windows.Forms.TextBox textBoxQRScanner;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelScanQRVaild;
+        private System.Windows.Forms.TextBox textBoxPrintLMes;
+        private System.Windows.Forms.Label labelPrintMes;
     }
 }
 
