@@ -56,8 +56,9 @@
     <Compile Include="SerialPortFactory.cs" />
     <Compile Include="SerialPortHandler.cs" />
     <Compile Include="SerialPortReader.cs" />
+    <Compile Include="SerialPortRecDataTranslator.cs" />
     <Compile Include="SerialPortStack.cs" />
-    <Compile Include="WeightBuffer.cs" />
+    <Compile Include="WeightStack.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

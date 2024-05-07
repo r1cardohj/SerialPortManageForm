@@ -8,21 +8,24 @@ namespace SerialPortManageForm
     internal class Logger
     {
         private static string Pwd = AppDomain.CurrentDomain.BaseDirectory; //当前工作目录
-        private static StreamWriter writer = new StreamWriter(Pwd + "\\log.txt", true, Encoding.Default);
+        private static StreamWriter Writer = new StreamWriter(Pwd + "\\log.txt", true, Encoding.Default);
 
         private Logger() { }
 
         public static void Log(string msg)
         {
-            writer.WriteLine(DateTime.Now.ToString() + " : " + msg);
-            writer.Flush(); 
+            Writer.WriteLine(DateTime.Now.ToString() + "  " + msg);
+            Writer.Flush();
         }
 
         public static void Clear()
         { 
-            writer.Close();
+            Writer.Close();
         }
 
-        
+        public static void Error(string msg)
+        {
+            Log($"ERROR: {msg}");
+        }
     }
 }

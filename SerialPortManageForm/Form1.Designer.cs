@@ -254,7 +254,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxCOMPort);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "EFG地秤工控程序v0.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

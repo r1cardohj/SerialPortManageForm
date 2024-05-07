@@ -22,7 +22,7 @@ namespace SerialPortManageForm
 
         public void handle()
         {
-            Thread reciver = new Thread( () => {
+            Thread worker = new Thread( () => {
                 int i = 0;
                 string resp;
                 try
@@ -39,6 +39,8 @@ namespace SerialPortManageForm
                         {
                             resp += Environment.NewLine;
                             this.sendCallBack(resp);
+                            Logger.Log($"GET {this.serialPort.PortName}: {resp}");
+                            //todo: parse resp and send to form
                         }
                         i++;
                     }
@@ -48,7 +50,7 @@ namespace SerialPortManageForm
                 }
                 catch (Exception e)
                 {
-                    Logger.Log(e.ToString());
+                    Logger.Error(e.ToString());
                     this.endCallBack(false);
                 }
                 finally
@@ -58,8 +60,8 @@ namespace SerialPortManageForm
                 }
             } );
             SerialPortBaseData.workerShouldStop = false;
-            reciver.Start();
-            SerialPortBaseData.WorkerThreads.Push(reciver);
+            worker.Start();
+            SerialPortBaseData.WorkerThreads.Push(worker);
         }
     }
 }

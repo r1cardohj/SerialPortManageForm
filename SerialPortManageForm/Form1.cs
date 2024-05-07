@@ -41,7 +41,8 @@ namespace SerialPortManageForm
         {
             // init COMPort
             comboBoxCOMPort.Items.AddRange(SerialPortBaseData.GetActivePortNames());
-            comboBoxCOMPort.SelectedIndex = 0; //默认选中第一个
+            if(comboBoxCOMPort.Items.Count > 0)
+                comboBoxCOMPort.SelectedIndex = 0; //默认选中第一个
 
             // init BaudRate
             foreach (var i in SerialPortBaseData.BaudRateSet)
@@ -110,7 +111,6 @@ namespace SerialPortManageForm
         }
 
         private void CancelOKOrErrorInfo(bool ret) {
-            // todo
             if (!ret)
                 MessageBox.Show("工作线程异常终止",
                                 "错误",
@@ -130,6 +130,7 @@ namespace SerialPortManageForm
         {
             SerialPortBaseData.workerShouldStop = true;
         }
+
         private void setConnectDisable(bool ret) { 
             comboBoxCOMPort.Enabled = ret;
             baudRateComboBox.Enabled = ret;
@@ -146,9 +147,6 @@ namespace SerialPortManageForm
                 {
                     setScanContentOkOrErr(true);
                     clearScanInputTimer.Stop();
-                    ScanContentHandler handler = new ScanContentHandler(tb.Text,
-                                                                        this.setTextBoxQRScanner,
-                                                                        )
                 }
                 else
                 {
@@ -180,7 +178,10 @@ namespace SerialPortManageForm
 
         private void setTextBoxQRScanner(string s)
         {
-            textBoxQRScanner.Text = s;
+            if (textBoxQRScanner.InvokeRequired)
+                textBoxQRScanner.Invoke(new Action<string>(setTextBoxQRScanner), s);
+            else
+                textBoxQRScanner.Text = s;
         }
     }
 } 

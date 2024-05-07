@@ -33,7 +33,7 @@ namespace SerialPortManageForm
         private static readonly Stack<Thread> _workers = new Stack<Thread>();
 
         //用于存放体重的缓冲区
-        private static readonly WeightBuffer _weightBuff = new WeightBuffer();
+        private static readonly WeightStack _weightBuff = new WeightStack();
 
         private SerialPortBaseData() { }
 
@@ -61,7 +61,7 @@ namespace SerialPortManageForm
             }
         }
 
-        public static WeightBuffer WeigthBuf {
+        public static WeightStack WeigthBuf {
             get {
                 return _weightBuff;
             }

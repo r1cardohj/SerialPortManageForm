@@ -6,6 +6,12 @@ namespace SerialPortManageForm
 {
     internal class SerialPortReader
     {
+        public static readonly byte BEGIN_SYMBOL = 0x02;
+        public static readonly byte END_SYMBOL1 = 0x0d;
+        public static readonly byte END_SYMBOL2 = 0x0a;
+        public static readonly int PACK_LENGTH = 17; //完整包的大小占17字节
+        public static readonly int STEADY_SIGNAL_IDX = 2;
+        public static readonly byte STEADY_SYMBOL = 0x4d;
         static void Test(string[] args)
         {
             try
@@ -32,14 +38,15 @@ namespace SerialPortManageForm
             Console.WriteLine("finish");
             Console.ReadKey();
         }
-        public string Read(SerialPort serialPort)
+
+
+        public byte[] Read(SerialPort serialPort)
         {
             int len = serialPort.BytesToRead;//获取可以读取的字节数
             byte[] buff = new byte[len];//创建缓存数据数组
             serialPort.Read(buff, 0, len);//把数据读取到buff数组
 
-            return Encoding.Default.GetString(buff);
-
+            return buff;
         }
     }
 
