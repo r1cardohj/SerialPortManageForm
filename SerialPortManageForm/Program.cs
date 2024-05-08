@@ -23,5 +23,6 @@ namespace SerialPortManageForm
                 Logger.Clear();
             }
         }
+
     }
 }

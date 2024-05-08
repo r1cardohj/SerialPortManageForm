@@ -147,7 +147,7 @@
             // 
             // dataBoxDisWeigth
             // 
-            this.dataBoxDisWeigth.Font = new System.Drawing.Font("Gill Sans Ultra Bold", 72F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataBoxDisWeigth.Font = new System.Drawing.Font("Consolas", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataBoxDisWeigth.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.dataBoxDisWeigth.Location = new System.Drawing.Point(260, 123);
             this.dataBoxDisWeigth.Name = "dataBoxDisWeigth";

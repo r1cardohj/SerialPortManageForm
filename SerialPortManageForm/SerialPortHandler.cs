@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 using System.IO.Ports;
 using System.Text;
 using System.Threading;
@@ -9,40 +10,48 @@ namespace SerialPortManageForm
     internal class SerialPortHandler
     {
         private Action<string> sendCallBack;
+        private Action<string> sendWeigthCallBack;
         private Action<bool> endCallBack;
         private SerialPort serialPort;
         public SerialPortHandler(SerialPort serialPort,
+                                 Action<string> sendWeigthFunc,
                                  Action<string> sendFunc,
                                  Action<bool> endFunc)
         {
             this.serialPort = serialPort;
-            this.sendCallBack = sendFunc; //回调函数 用于把工作线程的体重信息送回UI线程
+            this.sendWeigthCallBack = sendWeigthFunc;   //回调函数 用于把体重送回UI线程
+            this.sendCallBack = sendFunc; //回调函数 用于把串口返回信息送回UI线程
             this.endCallBack = endFunc; //回调函数 返回用于标志工作线程是否正常中止信息回UI线程
         }
 
         public void handle()
         {
             Thread worker = new Thread( () => {
-                int i = 0;
-                string resp;
+                //int i = 0;
+                byte[] resp;
                 try
                 {
                     SerialPortReader reader = new SerialPortReader();
+                    SerialPortRecDataTranslator translator = new SerialPortRecDataTranslator();
                     this.serialPort.Open();
                     while (!SerialPortBaseData.workerShouldStop)
                     {
-                        Thread.Sleep(500);
+                        Thread.Sleep(200);
                         //resp = i.ToString();
-                        resp = reader.Read(this.serialPort);
 
-                        if (!string.IsNullOrEmpty(resp))
+                        if (Settings.DEBUG)
+                            resp = reader.FakeRead(this.serialPort);
+                        else
+                            resp = reader.Read(this.serialPort);
+                        this.sendCallBack(Encoding.ASCII.GetString(resp) + Environment.NewLine);
+                        List<Weight> list = translator.Translate(resp);
+                        foreach (var w in list)
                         {
-                            resp += Environment.NewLine;
-                            this.sendCallBack(resp);
-                            Logger.Log($"GET {this.serialPort.PortName}: {resp}");
-                            //todo: parse resp and send to form
+                            SerialPortBaseData.WeigthStack.Push(w);
+                            this.sendWeigthCallBack($"{w.Number}{w.Unit}");
                         }
-                        i++;
+                        
+                        //i++;
                     }
                     if (this.serialPort.IsOpen)
                         this.serialPort.Close();

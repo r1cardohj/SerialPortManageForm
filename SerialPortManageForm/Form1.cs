@@ -73,6 +73,7 @@ namespace SerialPortManageForm
                     SerialPortFactory factory = new SerialPortFactory(portName, baudRate, dataBits);
                     SerialPort port = factory.CreateSerialPort();
                     SerialPortHandler handler = new SerialPortHandler(port,
+                                                                      this.DataBoxDisWeigthRefresh,
                                                                       this.DataTextBoxRefresh,
                                                                       this.CancelOKOrErrorInfo);
                     handler.handle();
@@ -109,6 +110,14 @@ namespace SerialPortManageForm
                 DataTextBox.ScrollToCaret();
             }
         }
+        private void DataBoxDisWeigthRefresh(string s) {
+            if (dataBoxDisWeigth.InvokeRequired)
+                dataBoxDisWeigth.Invoke(new Action<string>(DataBoxDisWeigthRefresh), s);
+            else {
+                dataBoxDisWeigth.Text = s;
+            }
+        }
+
 
         private void CancelOKOrErrorInfo(bool ret) {
             if (!ret)

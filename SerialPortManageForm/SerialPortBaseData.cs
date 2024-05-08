@@ -61,7 +61,7 @@ namespace SerialPortManageForm
             }
         }
 
-        public static WeightStack WeigthBuf {
+        public static WeightStack WeigthStack {
             get {
                 return _weightBuff;
             }
