@@ -15,17 +15,17 @@ namespace SerialPortManageForm
         //用于控制子线程结束
         public static volatile bool workerShouldStop = false; 
 
-        public static readonly int[] BaudRateSet = {
+        public static readonly int[] BAUD_RATE_SET = {
             1200, 2400, 4800, 9600, 19200, 38400, 57600, 76800,
             115200, 128000, 230400, 256000, 460800, 512000, 
             576000, 921600
         };
 
-        public static readonly int[] DataBitsSet = { 5, 6, 7, 8 };
+        public static readonly int[] DATA_BITS_SET = { 5, 6, 7, 8 };
 
-        public static readonly int DefaultBaudRate = 9600;
+        public static readonly int DEFAULT_BAUD_RATE = 9600;
 
-        public static readonly int DefaultDataBits = 8;
+        public static readonly int DEFAULT_DATA_BITS = 8;
 
         private static readonly SerialPortStack _stack = new SerialPortStack();
 

@@ -28,6 +28,7 @@ namespace SerialPortManageForm
             this.Unit = Unit;
             this.WeigthType = WeigthType;
         }
+
         public static Weight Decode(byte[] data)
         {
             if (!data.Length.Equals(SerialPortRecDataTranslator.PACK_LENGTH))
@@ -40,6 +41,7 @@ namespace SerialPortManageForm
                 );
 
         }
+
         public static double ParseNumber(byte[] data)
         {
             if (!data.Length.Equals(SerialPortRecDataTranslator.PACK_LENGTH))
@@ -56,6 +58,7 @@ namespace SerialPortManageForm
             
             return Convert.ToDouble(num_text);   
         }
+
         public static Units ParseUnits(byte[] data)
         {
             if (!data.Length.Equals(SerialPortRecDataTranslator.PACK_LENGTH))
@@ -84,6 +87,7 @@ namespace SerialPortManageForm
             }
             else { throw new InvalidOperationException("no match Units type, parse failed."); }
         }
+
         public static WeigthTypes ParseWeigthType(byte[] data)
         {
             if (!data.Length.Equals(SerialPortRecDataTranslator.PACK_LENGTH))

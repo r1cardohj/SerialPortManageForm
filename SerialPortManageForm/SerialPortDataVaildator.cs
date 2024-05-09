@@ -20,12 +20,12 @@ namespace SerialPortManageForm
         }
         public static bool IsAllowedBaudrate(int Baudrate)
         {
-            return Array.Exists(SerialPortBaseData.BaudRateSet, 
+            return Array.Exists(SerialPortBaseData.BAUD_RATE_SET, 
                 v => v.Equals(Baudrate));
         }
         public static bool IsAllowedDataBits(int DataBits)
         {
-            return Array.Exists(SerialPortBaseData.DataBitsSet,
+            return Array.Exists(SerialPortBaseData.DATA_BITS_SET,
                 v => v.Equals(DataBits));
         }
     }

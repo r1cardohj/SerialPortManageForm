@@ -15,15 +15,5 @@ namespace SerialPortManageForm
         { 
                
         }
-
-        private bool isWeightListSteady(List<double> weights)
-        {
-            foreach (var weight in weights)
-            { 
-            }
-            return false;
-        }
-
-        
     }
 }

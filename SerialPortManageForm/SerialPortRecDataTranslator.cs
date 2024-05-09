@@ -71,9 +71,7 @@ namespace SerialPortManageForm
 
                 }
                 if (isRead)
-                    pack[pack_idx++] = buff[i];
-                
-
+                    pack[pack_idx++] = buff[i]; 
             }
             return res;
         }

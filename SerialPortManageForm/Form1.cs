@@ -45,18 +45,18 @@ namespace SerialPortManageForm
                 comboBoxCOMPort.SelectedIndex = 0; //默认选中第一个
 
             // init BaudRate
-            foreach (var i in SerialPortBaseData.BaudRateSet)
+            foreach (var i in SerialPortBaseData.BAUD_RATE_SET)
             {
                 baudRateComboBox.Items.Add(i);
             }
-            baudRateComboBox.SelectedItem = SerialPortBaseData.DefaultBaudRate;
+            baudRateComboBox.SelectedItem = SerialPortBaseData.DEFAULT_BAUD_RATE;
 
             //init DataBits
-            foreach (var i in SerialPortBaseData.DataBitsSet)
+            foreach (var i in SerialPortBaseData.DATA_BITS_SET)
             {
                 dataBitsComboBox.Items.Add(i);
             }
-            dataBitsComboBox.SelectedItem = SerialPortBaseData.DefaultDataBits;
+            dataBitsComboBox.SelectedItem = SerialPortBaseData.DEFAULT_DATA_BITS;
         }
 
         private void startBtn_Click(object sender, EventArgs e)
