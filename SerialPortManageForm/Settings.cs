@@ -8,5 +8,7 @@ namespace SerialPortManageForm
     internal class Settings
     {
         public static readonly bool DEBUG = true;
+        public static String FRX_TEMPLATE_FILE_PATH = @"template\fs.frx";
+
     }
 }

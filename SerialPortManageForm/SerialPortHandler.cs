@@ -65,12 +65,12 @@ namespace SerialPortManageForm
                 finally
                 { 
                     SerialPortBaseData.PortCtxStack.Pop();
-                    SerialPortBaseData.WorkerThreads.Pop();
+                    SerialPortBaseData.WorkerThreadsStack.Pop();
                 }
             } );
             SerialPortBaseData.workerShouldStop = false;
             worker.Start();
-            SerialPortBaseData.WorkerThreads.Push(worker);
+            SerialPortBaseData.WorkerThreadsStack.Push(worker);
         }
     }
 }

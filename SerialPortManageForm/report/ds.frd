@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Dictionary>
+  <TableDataSource Name="baseInfo" ReferenceName="Data.baseInfo" DataType="System.String" Enabled="true">
+    <Column Name="vendId" DataType="System.String"/>
+	<Column Name="itemId" DataType="System.String"/>
+	<Column Name="panId" DataType="System.String"/>
+	<Column Name="grossWeigth" DataType="System.String"/>
+	<Column Name="tareWeigth" DataType="System.String"/>
+	<Column Name="netWeigth" DataType="System.String"/>
+	<Column Name="prodDate" DataType="System.String"/>
+	<Column Name="unit" DataType="System.String"/>
+  </TableDataSource>
+</Dictionary>

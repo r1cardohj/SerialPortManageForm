@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/11/2024 09:45:40" ReportInfo.Modified="05/13/2024 16:31:42" ReportInfo.CreatorVersion="2020.2.13.0">
+  <ScriptText>using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Picture1_BeforePrint(object sender, EventArgs e)
+    {
+      /*string imgStr　= (string)Report.GetParameterValue(&quot;image&quot;);
+      
+      byte[] imgData=Convert.FromBase64String(imgStr);
+      MemoryStream ms = new MemoryStream(imgData);
+      Image img = System.Drawing.Image.FromStream(ms);
+      Picture1.Image=img;          */
+    }
+  }
+}
+/*
+{procedure GroupFooter1OnBeforePrint(Sender: TfrxComponent);
+begin
+      while engine.FreeSpace &gt;0.6 do
+    begin
+       engine.ShowBand(Child1);
+    end;  
+end;}  
+
+begin
+
+end.
+*/</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="baseInfo" ReferenceName="Data.baseInfo" DataType="System.String" Enabled="true">
+      <Column Name="vendId" DataType="System.String"/>
+      <Column Name="itemId" DataType="System.String"/>
+      <Column Name="panId" DataType="System.String"/>
+      <Column Name="grossWeigth" DataType="System.String"/>
+      <Column Name="tareWeigth" DataType="System.String"/>
+      <Column Name="netWeigth" DataType="System.String"/>
+      <Column Name="prodDate" DataType="System.String"/>
+      <Column Name="unit" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" LeftMargin="4" TopMargin="6" RightMargin="4" BottomMargin="0" Watermark.Font="宋体, 60pt">
+    <DataBand Name="MasterData1" Width="763.56" Height="181.42" Columns.Count="3" Columns.Width="254.36">
+      <TextObject Name="Memo1" Width="245.67" Height="173.86" Border.Lines="All" Padding="2, 1, 2, 1" Font="Arial, 8pt"/>
+      <TextObject Name="Memo2" Width="52.91" Height="22.68" Border.Lines="All" Text="供应商" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo3" Top="22.68" Width="52.91" Height="22.68" Border.Lines="All" Text="物料代码" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo4" Top="45.35" Width="52.91" Height="30.24" Border.Lines="All" Text="物料名称" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo5" Left="52.91" Width="117.17" Height="22.68" Border.Lines="All" Text="[baseInfo.vendId]" Padding="2, 1, 2, 1" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo6" Left="52.91" Top="22.68" Width="117.17" Height="22.68" Border.Lines="All" Text="[baseInfo.itemId]" Padding="2, 1, 2, 1" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo7" Left="52.91" Top="45.35" Width="117.17" Height="30.24" Border.Lines="All" CanGrow="true" CanShrink="true" Padding="2, 1, 2, 1" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo8" Left="170.08" Width="75.59" Height="75.59" Border.Lines="All" BeforePrintEvent="Memo8_BeforePrint" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo9" Top="75.59" Width="52.91" Height="30.24" Border.Lines="All" Text="规格图号" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo10" Left="52.91" Top="75.59" Width="192.76" Height="30.24" Border.Lines="All" CanGrow="true" CanShrink="true" Padding="2, 1, 2, 1" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo11" Top="105.83" Width="52.91" Height="22.68" Border.Lines="All" Text="盘号" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo12" Top="128.5" Width="52.91" Height="22.68" Border.Lines="All" Text="单位" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo13" Top="151.18" Width="52.91" Height="22.68" Border.Lines="All" Text="生产日期" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo14" Left="124.72" Top="105.83" Width="52.91" Height="22.68" Border.Lines="All" Text="毛重" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo15" Left="124.72" Top="128.5" Width="52.91" Height="22.68" Border.Lines="All" Text="皮重" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo16" Left="124.72" Top="151.18" Width="52.91" Height="22.68" Border.Lines="All" Text="净重" Padding="2, 1, 2, 1" HorzAlign="Center" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo17" Left="52.91" Top="105.83" Width="71.81" Height="22.68" Border.Lines="All" Text="[baseInfo.panId]" Padding="2, 1, 2, 1" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo18" Left="52.91" Top="128.5" Width="71.81" Height="22.68" Border.Lines="All" Text="[baseInfo.unit]" Padding="2, 1, 2, 1" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo19" Left="52.91" Top="151.18" Width="71.81" Height="22.68" Border.Lines="All" Text="[baseInfo.prodDate]" Padding="2, 1, 2, 1" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo20" Left="177.64" Top="105.83" Width="68.03" Height="22.68" Border.Lines="All" Text="[baseInfo.grossWeigth]" Padding="2, 1, 2, 1" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo21" Left="177.64" Top="128.5" Width="68.03" Height="22.68" Border.Lines="All" Text="[baseInfo.tareWeigth]" Padding="2, 1, 2, 1" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Memo22" Left="177.64" Top="151.18" Width="68.03" Height="22.68" Border.Lines="All" Text="[baseInfo.netWeigth]" Padding="2, 1, 2, 1" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" VertAlign="Center" Font="宋体, 8pt"/>
+      <PictureObject Name="Picture1" Left="170.1" Width="75.6" Height="75.6" BeforePrintEvent="Picture1_BeforePrint" Image=""/>
+    </DataBand>
+  </ReportPage>
+</Report>

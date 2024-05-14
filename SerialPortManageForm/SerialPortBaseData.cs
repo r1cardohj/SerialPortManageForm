@@ -55,7 +55,7 @@ namespace SerialPortManageForm
             }
         }
         
-        public static Stack<Thread> WorkerThreads {
+        public static Stack<Thread> WorkerThreadsStack {
             get {
                 return _workers;
             }

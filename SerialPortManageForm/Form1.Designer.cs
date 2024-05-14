@@ -46,12 +46,15 @@
             this.labelScanQRVaild = new System.Windows.Forms.Label();
             this.textBoxPrintLMes = new System.Windows.Forms.TextBox();
             this.labelPrintMes = new System.Windows.Forms.Label();
+            this.previewControl1 = new FastReport.Preview.PreviewControl();
+            this.PrinterLabel = new System.Windows.Forms.Label();
+            this.comboBoxPrinter = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboBoxCOMPort
             // 
             this.comboBoxCOMPort.FormattingEnabled = true;
-            this.comboBoxCOMPort.Location = new System.Drawing.Point(131, 33);
+            this.comboBoxCOMPort.Location = new System.Drawing.Point(75, 32);
             this.comboBoxCOMPort.Name = "comboBoxCOMPort";
             this.comboBoxCOMPort.Size = new System.Drawing.Size(56, 20);
             this.comboBoxCOMPort.TabIndex = 1;
@@ -60,7 +63,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(70, 37);
+            this.label1.Location = new System.Drawing.Point(14, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 2;
@@ -70,7 +73,7 @@
             // 
             this.baudRateLabel.AutoSize = true;
             this.baudRateLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.baudRateLabel.Location = new System.Drawing.Point(210, 37);
+            this.baudRateLabel.Location = new System.Drawing.Point(137, 34);
             this.baudRateLabel.Name = "baudRateLabel";
             this.baudRateLabel.Size = new System.Drawing.Size(71, 16);
             this.baudRateLabel.TabIndex = 3;
@@ -79,7 +82,7 @@
             // baudRateComboBox
             // 
             this.baudRateComboBox.FormattingEnabled = true;
-            this.baudRateComboBox.Location = new System.Drawing.Point(287, 33);
+            this.baudRateComboBox.Location = new System.Drawing.Point(200, 32);
             this.baudRateComboBox.Name = "baudRateComboBox";
             this.baudRateComboBox.Size = new System.Drawing.Size(69, 20);
             this.baudRateComboBox.TabIndex = 4;
@@ -88,7 +91,7 @@
             // 
             this.dataBitsLabel.AutoSize = true;
             this.dataBitsLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataBitsLabel.Location = new System.Drawing.Point(376, 37);
+            this.dataBitsLabel.Location = new System.Drawing.Point(275, 34);
             this.dataBitsLabel.Name = "dataBitsLabel";
             this.dataBitsLabel.Size = new System.Drawing.Size(71, 16);
             this.dataBitsLabel.TabIndex = 5;
@@ -97,14 +100,14 @@
             // dataBitsComboBox
             // 
             this.dataBitsComboBox.FormattingEnabled = true;
-            this.dataBitsComboBox.Location = new System.Drawing.Point(453, 33);
+            this.dataBitsComboBox.Location = new System.Drawing.Point(338, 32);
             this.dataBitsComboBox.Name = "dataBitsComboBox";
             this.dataBitsComboBox.Size = new System.Drawing.Size(47, 20);
             this.dataBitsComboBox.TabIndex = 6;
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(536, 31);
+            this.startBtn.Location = new System.Drawing.Point(608, 29);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(75, 23);
             this.startBtn.TabIndex = 7;
@@ -114,7 +117,7 @@
             // 
             // endBtn
             // 
-            this.endBtn.Location = new System.Drawing.Point(631, 30);
+            this.endBtn.Location = new System.Drawing.Point(689, 28);
             this.endBtn.Name = "endBtn";
             this.endBtn.Size = new System.Drawing.Size(75, 23);
             this.endBtn.TabIndex = 8;
@@ -210,13 +213,13 @@
             // textBoxPrintLMes
             // 
             this.textBoxPrintLMes.AcceptsReturn = true;
-            this.textBoxPrintLMes.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxPrintLMes.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxPrintLMes.Location = new System.Drawing.Point(584, 123);
             this.textBoxPrintLMes.Multiline = true;
             this.textBoxPrintLMes.Name = "textBoxPrintLMes";
             this.textBoxPrintLMes.ReadOnly = true;
             this.textBoxPrintLMes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxPrintLMes.Size = new System.Drawing.Size(166, 250);
+            this.textBoxPrintLMes.Size = new System.Drawing.Size(180, 250);
             this.textBoxPrintLMes.TabIndex = 18;
             this.textBoxPrintLMes.WordWrap = false;
             // 
@@ -230,11 +233,44 @@
             this.labelPrintMes.TabIndex = 19;
             this.labelPrintMes.Text = "打印消息：";
             // 
+            // previewControl1
+            // 
+            this.previewControl1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.previewControl1.Font = new System.Drawing.Font("宋体", 9F);
+            this.previewControl1.Location = new System.Drawing.Point(47, 390);
+            this.previewControl1.Name = "previewControl1";
+            this.previewControl1.PageOffset = new System.Drawing.Point(10, 10);
+            this.previewControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.previewControl1.SaveInitialDirectory = null;
+            this.previewControl1.Size = new System.Drawing.Size(703, 250);
+            this.previewControl1.TabIndex = 20;
+            // 
+            // PrinterLabel
+            // 
+            this.PrinterLabel.AutoSize = true;
+            this.PrinterLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.PrinterLabel.Location = new System.Drawing.Point(391, 35);
+            this.PrinterLabel.Name = "PrinterLabel";
+            this.PrinterLabel.Size = new System.Drawing.Size(71, 16);
+            this.PrinterLabel.TabIndex = 21;
+            this.PrinterLabel.Text = "打印机：";
+            // 
+            // comboBoxPrinter
+            // 
+            this.comboBoxPrinter.FormattingEnabled = true;
+            this.comboBoxPrinter.Location = new System.Drawing.Point(456, 31);
+            this.comboBoxPrinter.Name = "comboBoxPrinter";
+            this.comboBoxPrinter.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxPrinter.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 638);
+            this.Controls.Add(this.comboBoxPrinter);
+            this.Controls.Add(this.PrinterLabel);
+            this.Controls.Add(this.previewControl1);
             this.Controls.Add(this.labelPrintMes);
             this.Controls.Add(this.textBoxPrintLMes);
             this.Controls.Add(this.labelScanQRVaild);
@@ -281,6 +317,9 @@
         private System.Windows.Forms.Label labelScanQRVaild;
         private System.Windows.Forms.TextBox textBoxPrintLMes;
         private System.Windows.Forms.Label labelPrintMes;
+        private FastReport.Preview.PreviewControl previewControl1;
+        private System.Windows.Forms.Label PrinterLabel;
+        private System.Windows.Forms.ComboBox comboBoxPrinter;
     }
 }
 

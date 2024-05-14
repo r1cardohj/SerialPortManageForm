@@ -1,8 +1,12 @@
-﻿using System;
+﻿using FastReport.DevComponents.DotNetBar.Metro;
+using FastReport.DevComponents.DotNetBar.Rendering;
+using SerialPortManageForm.report;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO.Ports;
 using System.Text;
 using System.Threading;
@@ -41,7 +45,7 @@ namespace SerialPortManageForm
         {
             // init COMPort
             comboBoxCOMPort.Items.AddRange(SerialPortBaseData.GetActivePortNames());
-            if(comboBoxCOMPort.Items.Count > 0)
+            if (comboBoxCOMPort.Items.Count > 0)
                 comboBoxCOMPort.SelectedIndex = 0; //默认选中第一个
 
             // init BaudRate
@@ -57,6 +61,14 @@ namespace SerialPortManageForm
                 dataBitsComboBox.Items.Add(i);
             }
             dataBitsComboBox.SelectedItem = SerialPortBaseData.DEFAULT_DATA_BITS;
+
+            //init Printer
+            foreach (string p_text in PrinterSettings.InstalledPrinters)
+            {
+                comboBoxPrinter.Items.Add(p_text);
+            }
+            if (comboBoxPrinter.Items.Count > 0)
+                comboBoxPrinter.SelectedIndex = 0;
         }
 
         private void startBtn_Click(object sender, EventArgs e)
@@ -94,7 +106,7 @@ namespace SerialPortManageForm
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
-            
+
 
         }
 
@@ -110,11 +122,32 @@ namespace SerialPortManageForm
                 DataTextBox.ScrollToCaret();
             }
         }
+
+        private void textBoxPrintLMesRefresh(string s) {
+            if (textBoxPrintLMes.InvokeRequired)
+            {
+                textBoxPrintLMes.Invoke(new Action<string>(textBoxPrintLMesRefresh), s);
+            }
+            else
+            {
+                textBoxPrintLMes.AppendText(s);
+                DataTextBox.ScrollToCaret();
+            }
+        }
+
         private void DataBoxDisWeigthRefresh(string s) {
             if (dataBoxDisWeigth.InvokeRequired)
                 dataBoxDisWeigth.Invoke(new Action<string>(DataBoxDisWeigthRefresh), s);
             else {
                 dataBoxDisWeigth.Text = s;
+            }
+        }
+
+        private void PreviewRefresh(Action<bool> f) {
+            if (previewControl1.InvokeRequired)
+                previewControl1.Invoke(new Action<Action<bool>>(PreviewRefresh), f);
+            else {
+                f(true);
             }
         }
 
@@ -134,16 +167,16 @@ namespace SerialPortManageForm
                 this.setConnectDisable(true);
             }
         }
-
         private void endBtn_Click(object sender, EventArgs e)
         {
             SerialPortBaseData.workerShouldStop = true;
         }
 
-        private void setConnectDisable(bool ret) { 
+        private void setConnectDisable(bool ret) {
             comboBoxCOMPort.Enabled = ret;
             baudRateComboBox.Enabled = ret;
             dataBitsComboBox.Enabled = ret;
+            comboBoxPrinter.Enabled = ret;
             startBtn.Enabled = ret;
         }
 
@@ -155,6 +188,12 @@ namespace SerialPortManageForm
                 if (ScanContentVailator.Vailate(tb.Text))
                 {
                     setScanContentOkOrErr(true);
+                    ScanContentHandler handler = new ScanContentHandler(tb.Text,
+                                                                        comboBoxPrinter.Text,
+                                                                        this.textBoxPrintLMesRefresh,
+                                                                        this.PreviewctrlRefresh,
+                                                                        this.previewControl1);
+                    handler.handle();
                     clearScanInputTimer.Stop();
                 }
                 else
@@ -173,7 +212,7 @@ namespace SerialPortManageForm
                 labelScanQRVaild.ForeColor = Color.Green;
             }
             else
-            { 
+            {
                 labelScanQRVaild.Text = "❌";
                 labelScanQRVaild.ForeColor = Color.Red;
             }
@@ -181,7 +220,7 @@ namespace SerialPortManageForm
 
         private bool isScanInputErr()
         {
-            return labelScanQRVaild.Text == "❌" 
+            return labelScanQRVaild.Text == "❌"
                 && textBoxQRScanner.Text != "";
         }
 
@@ -192,5 +231,13 @@ namespace SerialPortManageForm
             else
                 textBoxQRScanner.Text = s;
         }
-    }
+        public void PreviewctrlRefresh(VoidParamReturnVoidFunc f){
+            if (previewControl1.InvokeRequired)
+                previewControl1.Invoke(f);
+            else
+                f();
+        }
+
+    } 
+    public delegate void VoidParamReturnVoidFunc();
 } 

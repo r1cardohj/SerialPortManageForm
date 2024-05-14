@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SerialPortManageForm.report;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,12 +9,68 @@ namespace SerialPortManageForm
 {
     internal class ScanContentHandler
     {
-        public ScanContentHandler(string s){
+        private LabelDataModel data;
+        private Action<string> sendCallback;
+        private FastReport.Preview.PreviewControl previewCtrl;
+        private Action<VoidParamReturnVoidFunc> previewCallback;
+        private string Printer;
+        /*
+         * 这个构造方法为测试用 打印到窗口预览上
+         */
+        public ScanContentHandler(string scanContent,
+                                  string Printer,
+                                  Action<string> sendCallback,
+                                  Action<VoidParamReturnVoidFunc> previewCallback,
+                                  FastReport.Preview.PreviewControl previewCtrl
+                                  )
+        {
+            this.data = LabelDataModel.ParseFromCodeStr(scanContent);
+
+            this.sendCallback = sendCallback;
+            this.previewCallback = previewCallback;
+            this.previewCtrl = previewCtrl; 
+            this.Printer = Printer;
+
+        }
+
+        public ScanContentHandler(string scanContent,
+                                  string printer,
+                                  Action<string> sendCallback)
+        {
+            this.data = LabelDataModel.ParseFromCodeStr(scanContent);
+            this.Printer = printer;
+            this.sendCallback = sendCallback;
         }
 
         public void handle()
-        { 
-               
+        {
+            Thread t = new Thread(() => {
+
+                try
+                {
+                    data.SetGrossWeigth(SerialPortBaseData.WeigthStack.Peek().Number);
+                    LabelReport report = new LabelReport(data.makeDataSet());
+                    //report.RegisterPreviewCtrl(previewCtrl);
+                    report.RegisterPrinter(this.Printer);
+                    report.RegisterPreviewCtrl(this.previewCtrl);
+                    this.previewCallback(report.Print);
+                    this.sendCallback($"{DateTime.Now} : 打印成功" + System.Environment.NewLine);
+                    //定义一个公开的委托
+                    
+                    //在Form.class中为该委托赋予函数
+                    //在函数中更新预览控件
+                }
+                catch (Exception e)
+                {
+                    Logger.Error(e.ToString());
+                    this.sendCallback($"{DateTime.Now} : 打印失败, {e}" + System.Environment.NewLine);
+                }
+                finally
+                {
+                    SerialPortBaseData.WeigthStack.Clear(); //清空体重信息保存栈
+                }
+            });
+            t.Start();
         }
     }
 }

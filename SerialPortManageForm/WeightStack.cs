@@ -144,5 +144,9 @@ namespace SerialPortManageForm
             }
             return _buf[_buf.Count - 1];
         }
+        public void Clear()
+        {
+            _buf.Clear();
+        }
     }
 }
