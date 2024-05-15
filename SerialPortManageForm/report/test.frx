@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/14/2024 10:55:00" ReportInfo.Modified="05/14/2024 11:08:55" ReportInfo.CreatorVersion="2020.2.13.0">
+  <Dictionary>
+    <TableDataSource Name="baseInfo" ReferenceName="Data.baseInfo" DataType="System.String" Enabled="true">
+      <Column Name="vendId" DataType="System.String"/>
+      <Column Name="itemId" DataType="System.String"/>
+      <Column Name="panId" DataType="System.String"/>
+      <Column Name="grossWeigth" DataType="System.String"/>
+      <Column Name="tareWeigth" DataType="System.String"/>
+      <Column Name="netWeigth" DataType="System.String"/>
+      <Column Name="prodDate" DataType="System.String"/>
+      <Column Name="unit" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Guides="245.7,708.75" Watermark.Font="宋体, 60pt">
+    <DataBand Name="Data1" Width="718.2" Height="179.55" DataSource="baseInfo">
+      <TextObject Name="Text1" Top="9.45" Width="47.25" Height="18.9" Text="供应商" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text2" Top="37.8" Width="56.7" Height="18.9" Text="物料代码" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text3" Top="94.5" Width="28.35" Height="18.9" Text="盘号" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text4" Top="122.85" Width="28.35" Height="18.9" Text="单位" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text5" Top="151.2" Width="28.35" Height="18.9" Text="生产单位" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text6" Left="132.3" Top="94.5" Width="47.25" Height="18.9" Text="毛重" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text7" Left="132.3" Top="122.85" Width="47.25" Height="18.9" Text="皮重" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text8" Left="132.3" Top="151.2" Width="47.25" Height="18.9" Text="净重" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text9" Left="56.7" Top="9.45" Width="94.5" Height="18.9" Text="[baseInfo.vendId]" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text10" Left="56.7" Top="37.8" Width="94.5" Height="18.9" Text="[baseInfo.itemId]" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text11" Left="28.35" Top="94.5" Width="85.05" Height="18.9" Text="[baseInfo.panId]" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text12" Left="179.55" Top="94.5" Width="66.15" Height="18.9" Text="[baseInfo.grossWeigth]" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text13" Left="179.55" Top="122.85" Width="66.15" Height="18.9" Text="[baseInfo.tareWeigth]" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text14" Left="179.55" Top="151.2" Width="66.15" Height="18.9" Text="[baseInfo.netWeigth]" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text15" Left="28.35" Top="122.85" Width="85.05" Height="18.9" Text="[baseInfo.unit]" Font="宋体, 7.5pt"/>
+      <TextObject Name="Text16" Left="28.35" Top="151.2" Width="85.05" Height="18.9" Text="[baseInfo.prodDate]" Font="宋体, 7.5pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

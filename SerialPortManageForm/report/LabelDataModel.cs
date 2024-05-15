@@ -74,6 +74,7 @@ namespace SerialPortManageForm.report
             dt.Columns.Add("netWeigth", typeof(String));
             dt.Columns.Add("prodDate", typeof(String));
             dt.Columns.Add("unit", typeof(String));
+            dt.Columns.Add("qrcodeText", typeof(String));
 
             dt.Rows.Add(new object[] { 
                 this.vendId,
@@ -83,7 +84,8 @@ namespace SerialPortManageForm.report
                 this.tareWeigth,
                 this.netWeigth,
                 this.prodDate,
-                this.unit
+                this.unit,
+                makeQRCodeText()
             });
             data.Tables.Add(dt);
 
@@ -97,6 +99,10 @@ namespace SerialPortManageForm.report
 
             this.grossWeigth = newGrossWeigth.ToString();
             this.netWeigth = (newGrossWeigth - tw).ToString();
+        }
+        public string makeQRCodeText() {
+            //input: {AD504480-A3A0-4AE2-A96B-565D02CF1AE3}|DQ0133|F0000083|C240403023|217.45|52.6|164.85|2024/03/09|
+            return $"{{{Guid.NewGuid()}}}|{this.vendId}|{this.itemId}|{this.panId}|{this.grossWeigth}|{this.tareWeigth}|{this.netWeigth}|{this.prodDate}|";
         }
         
     }

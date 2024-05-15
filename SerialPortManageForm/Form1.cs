@@ -118,6 +118,8 @@ namespace SerialPortManageForm
             }
             else
             {
+                if (DataTextBox.Text.Length >= DataTextBox.MaxLength)
+                    DataTextBox.Clear();
                 DataTextBox.AppendText(s);
                 DataTextBox.ScrollToCaret();
             }
@@ -130,6 +132,8 @@ namespace SerialPortManageForm
             }
             else
             {
+                if (textBoxPrintLMes.Text.Length >= textBoxPrintLMes.MaxLength)
+                    textBoxPrintLMes.Clear();
                 textBoxPrintLMes.AppendText(s);
                 DataTextBox.ScrollToCaret();
             }
@@ -192,6 +196,7 @@ namespace SerialPortManageForm
                                                                         comboBoxPrinter.Text,
                                                                         this.textBoxPrintLMesRefresh,
                                                                         this.PreviewctrlRefresh,
+                                                                        this.setTextBoxQRScanner,
                                                                         this.previewControl1);
                     handler.handle();
                     clearScanInputTimer.Stop();
@@ -235,7 +240,9 @@ namespace SerialPortManageForm
             if (previewControl1.InvokeRequired)
                 previewControl1.Invoke(f);
             else
+            {
                 f();
+            }
         }
 
     } 

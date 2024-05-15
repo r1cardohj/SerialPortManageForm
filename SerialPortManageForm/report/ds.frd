@@ -9,5 +9,6 @@
 	<Column Name="netWeigth" DataType="System.String"/>
 	<Column Name="prodDate" DataType="System.String"/>
 	<Column Name="unit" DataType="System.String"/>
+	<Column Name="qrcodeText" DataType="System.String"/>
   </TableDataSource>
 </Dictionary>

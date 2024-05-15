@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/14/2024 10:55:00" ReportInfo.Modified="05/14/2024 15:32:29" ReportInfo.CreatorVersion="2020.2.13.0">
+  <Dictionary>
+    <TableDataSource Name="baseInfo" ReferenceName="Data.baseInfo" DataType="System.String" Enabled="true">
+      <Column Name="vendId" DataType="System.String"/>
+      <Column Name="itemId" DataType="System.String"/>
+      <Column Name="panId" DataType="System.String"/>
+      <Column Name="grossWeigth" DataType="System.String"/>
+      <Column Name="tareWeigth" DataType="System.String"/>
+      <Column Name="netWeigth" DataType="System.String"/>
+      <Column Name="prodDate" DataType="System.String"/>
+      <Column Name="unit" DataType="System.String"/>
+      <Column Name="qrcodeText" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Guides="245.7,708.75" Watermark.Font="宋体, 60pt">
+    <DataBand Name="Data1" Width="718.2" Height="179.55">
+      <TextObject Name="Text1" Top="9.45" Width="47.25" Height="18.9" Text="供应商" Font="宋体, 9pt"/>
+      <TextObject Name="Text2" Top="37.8" Width="66.15" Height="18.9" Text="物料代码" Font="宋体, 9pt"/>
+      <TextObject Name="Text3" Top="66.15" Width="37.8" Height="18.9" Text="盘号" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Top="94.5" Width="37.8" Height="18.9" Text="单位" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Top="151.2" Width="66.15" Height="18.9" Text="生产日期" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Top="122.85" Width="47.25" Height="18.9" Text="毛重" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Left="132.3" Top="122.85" Width="47.25" Height="18.9" Text="皮重" Font="宋体, 9pt"/>
+      <TextObject Name="Text8" Left="132.3" Top="151.2" Width="47.25" Height="18.9" Text="净重" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="56.7" Top="9.45" Width="75.6" Height="18.9" Text="[baseInfo.vendId]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <TextObject Name="Text10" Left="56.7" Top="37.8" Width="75.6" Height="18.9" Text="[baseInfo.itemId]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <TextObject Name="Text11" Left="37.8" Top="66.15" Width="85.05" Height="18.9" Text="[baseInfo.panId]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <TextObject Name="Text12" Left="47.25" Top="122.85" Width="66.15" Height="18.9" Text="[baseInfo.grossWeigth]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <TextObject Name="Text13" Left="179.55" Top="122.85" Width="66.15" Height="18.9" Text="[baseInfo.tareWeigth]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <TextObject Name="Text14" Left="179.55" Top="151.2" Width="66.15" Height="18.9" Text="[baseInfo.netWeigth]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <TextObject Name="Text15" Left="37.8" Top="94.5" Width="85.05" Height="18.9" Text="[baseInfo.unit]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <TextObject Name="Text16" Left="47.25" Top="151.2" Width="85.05" Height="18.9" Text="[baseInfo.prodDate]" HorzAlign="Center" Font="宋体, 10.5pt"/>
+      <BarcodeObject Name="Barcode1" Left="139.86" Top="-9.45" Width="113.4" Height="113.4" AutoSize="false" Text="[baseInfo.qrcodeText]" ShowText="false" AllowExpressions="true" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+    </DataBand>
+  </ReportPage>
+</Report>

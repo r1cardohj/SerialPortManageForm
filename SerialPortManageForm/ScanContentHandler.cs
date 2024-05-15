@@ -13,6 +13,7 @@ namespace SerialPortManageForm
         private Action<string> sendCallback;
         private FastReport.Preview.PreviewControl previewCtrl;
         private Action<VoidParamReturnVoidFunc> previewCallback;
+        private Action<string> setQRScannerInput;
         private string Printer;
         /*
          * 这个构造方法为测试用 打印到窗口预览上
@@ -21,6 +22,7 @@ namespace SerialPortManageForm
                                   string Printer,
                                   Action<string> sendCallback,
                                   Action<VoidParamReturnVoidFunc> previewCallback,
+                                  Action<string> setQRScannerInput,
                                   FastReport.Preview.PreviewControl previewCtrl
                                   )
         {
@@ -28,6 +30,7 @@ namespace SerialPortManageForm
 
             this.sendCallback = sendCallback;
             this.previewCallback = previewCallback;
+            this.setQRScannerInput = setQRScannerInput;
             this.previewCtrl = previewCtrl; 
             this.Printer = Printer;
 
@@ -48,17 +51,16 @@ namespace SerialPortManageForm
 
                 try
                 {
-                    data.SetGrossWeigth(SerialPortBaseData.WeigthStack.Peek().Number);
-                    LabelReport report = new LabelReport(data.makeDataSet());
+                    this.data.SetGrossWeigth(SerialPortBaseData.WeigthStack.Peek().Number);
+                    LabelReport report = new LabelReport(this.data.makeDataSet());
                     //report.RegisterPreviewCtrl(previewCtrl);
                     report.RegisterPrinter(this.Printer);
+                    report.CreateQRCodeImg(this.data.makeQRCodeText());
                     report.RegisterPreviewCtrl(this.previewCtrl);
-                    this.previewCallback(report.Print);
+                    this.previewCallback(report.Show);
+                    Thread.Sleep(0); //切换下线程让主线程先预览
+                    report.Print();
                     this.sendCallback($"{DateTime.Now} : 打印成功" + System.Environment.NewLine);
-                    //定义一个公开的委托
-                    
-                    //在Form.class中为该委托赋予函数
-                    //在函数中更新预览控件
                 }
                 catch (Exception e)
                 {
@@ -68,6 +70,7 @@ namespace SerialPortManageForm
                 finally
                 {
                     SerialPortBaseData.WeigthStack.Clear(); //清空体重信息保存栈
+                    this.setQRScannerInput(""); //
                 }
             });
             t.Start();

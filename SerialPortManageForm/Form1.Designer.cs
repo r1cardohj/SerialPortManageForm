@@ -242,7 +242,7 @@
             this.previewControl1.PageOffset = new System.Drawing.Point(10, 10);
             this.previewControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.previewControl1.SaveInitialDirectory = null;
-            this.previewControl1.Size = new System.Drawing.Size(703, 250);
+            this.previewControl1.Size = new System.Drawing.Size(703, 293);
             this.previewControl1.TabIndex = 20;
             // 
             // PrinterLabel
@@ -267,7 +267,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 638);
+            this.ClientSize = new System.Drawing.Size(800, 695);
             this.Controls.Add(this.comboBoxPrinter);
             this.Controls.Add(this.PrinterLabel);
             this.Controls.Add(this.previewControl1);
